@@ -76,6 +76,7 @@ pids
 logs
 results
 
+### Project cruft.
 lib
 npm-debug.log
 node_modules
