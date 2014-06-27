@@ -51,7 +51,6 @@ define(['extend', 'jquery'], function(extend, $) {
             expect(out).toMatchObject(exp);
         });
 
-        it('')
         it('extend should handle nested objects', function() {
             var usr = {
                 name: 'Pepe',
