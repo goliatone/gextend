@@ -1,9 +1,13 @@
 {
   "name": "gextend",
   "version": "0.1.1",
-  "main": "./dist/gextend.min.js",
+  "main": "./src/extend.js",
   "ignore": [
-    "**/.*"
+    "test/**",
+    "examples/**",
+    "*.json",
+    "*.js",
+    ".*"
   ],
   "dependencies": {
     "requirejs": "~2.1.4"
