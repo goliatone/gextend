@@ -59,7 +59,7 @@
         return target;
     };
 
-
+    _extend.VERSION = '0.1.1';
 
     return _extend;
 }));
