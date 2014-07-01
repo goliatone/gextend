@@ -7,7 +7,7 @@
  */
 /* jshint strict: false, plusplus: true */
 /*global define: false, require: false, module: false, exports: false */
-(function(root, name, deps, factory) {
+/*(function(root, name, deps, factory) {
     "use strict";
     // Node
     if (typeof deps === 'function') {
@@ -35,7 +35,8 @@
             return mod;
         };
     }
-}(this, "extend", function() {
+}(this, "extend", function() {*/
+define("extend", function() {
 
     /**
      * Extend method.
@@ -62,4 +63,5 @@
     _extend.VERSION = '0.1.3';
 
     return _extend;
-}));
+})
+//);
