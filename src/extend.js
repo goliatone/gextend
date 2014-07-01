@@ -60,7 +60,7 @@ define("extend", function() {
         return target;
     };
 
-    _extend.VERSION = '0.1.3';
+    _extend.VERSION = '0.1.4';
 
     return _extend;
 })
