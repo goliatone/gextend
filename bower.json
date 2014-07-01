@@ -1,6 +1,6 @@
 {
   "name": "gextend",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "main": "./src/extend.js",
   "ignore": [
 
