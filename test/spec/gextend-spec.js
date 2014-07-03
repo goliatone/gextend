@@ -77,8 +77,6 @@ define(['extend', 'jquery'], function(extend, $) {
                 }]
             });
             expect(out).toMatchObject(exp);
-            console.log(out)
-            console.log('hola')
         });
 
         it('extend ')
