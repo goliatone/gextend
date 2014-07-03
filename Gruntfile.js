@@ -107,7 +107,7 @@ module.exports = function(grunt) {
             },
             debug: {
                 singleRun: false,
-                browsers: ['Chrome']
+                browsers: ['Chrome', 'PhantomJS']
             },
             dev: {
                 singleRun: false,
