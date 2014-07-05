@@ -1,7 +1,7 @@
 /*global define:true, describe:true , it:true , expect:true,
 beforeEach:true, sinon:true, spyOn:true , expect:true */
 /* jshint strict: false */
-define(['extend', 'jquery'], function(extend, $) {
+define(['extend'], function(extend) {
 
     describe('just checking', function() {
 
