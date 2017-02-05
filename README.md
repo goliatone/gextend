@@ -2,13 +2,49 @@
 
 [![Build Status](https://secure.travis-ci.org/goliatone/gextend.png)](http://travis-ci.org/goliatone/gextend)
 
-Simple extend helper module
+Simple extend helper module, for Node.js and Browser.
 
 ## Getting Started
-Download the [production version][min] or the [development version][max].
 
-[min]: https://raw.github.com/goliatone/gextend/master/dist/gextend.min.js
-[max]: https://raw.github.com/goliatone/gextend/master/dist/gextend.js
+The functionality is quite simple:
+
+```js
+const DEFAULTS = {
+    port: 9090,
+    url: 'http://localhost'
+};
+
+function connect(options){
+    let config = extend({}, DEFAULTS, options);
+    console.log('Connect to %s:%s', config.url, config.port);
+}
+
+connect({
+    url: 'http://127.0.0.1'
+});
+```
+
+A simple pattern that I find myself using often:
+
+
+```js
+class MyClass {
+    constructor(config){
+        if(config.autoinitialize) this.init(config);
+    }
+
+    init(config){
+        let attributes = ['logger', 'emitter', 'pubsub'];
+
+        extend.only(attributes);
+        extend(this, config);
+    }
+}
+
+MyClass.DEFAULTS = {
+    autoinitialize: true
+};
+```
 
 ## Development
 `npm install && bower install`
@@ -20,7 +56,6 @@ sudo chown $(whoami) ~/.npm
 sudo chown $(whoami) /usr/local/share/npm/bin
 sudo chown -R $(whoami) /usr/local/lib/node_modules
 ```
-
 
 If you bump versions, remember to update:
 - package.json
