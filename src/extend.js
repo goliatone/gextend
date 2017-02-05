@@ -45,9 +45,14 @@
     var _extend = function extend(target) {
         var sources = [].slice.call(arguments, 1);
 
+        var skip = _buildCheck(_extend._attr);
+
         sources.forEach(function(source) {
             if (!source) return;
             for (var property in source) {
+
+                if (skip(property)) continue;
+
                 if (source[property] && source[property].constructor &&
                     source[property].constructor === Object) {
                     target[property] = target[property] || {};
@@ -55,10 +60,40 @@
                 } else target[property] = source[property];
             }
         });
+
+        _extend._attr = null;
+
         return target;
     };
 
-    _extend.VERSION = '0.3.1';
+    function _buildCheck(attributes) {
+
+        if (typeof attributes === 'function') return attributes;
+
+        if (Array.isArray(attributes)) {
+            return function(attribute) {
+                return attributes.indexOf(attribute) === -1;
+            }
+        }
+
+        if (typeof attributes === 'boolean') return function(attribute) {
+            return !attributes;
+        }
+
+        if (!attributes) return function(attribute) {
+            return false;
+        }
+    }
+
+    _extend.buildCheck = _buildCheck;
+
+    _extend.only = function(attributes){
+        _extend._attr = attributes;
+        return _extend;
+    };
+
+
+    _extend.VERSION = '0.4.1';
 
     return _extend;
 }));
