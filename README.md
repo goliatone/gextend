@@ -90,11 +90,6 @@ And push it:
 In order to enable Travis for this specific project, you need to do so on your Travi's [profile](https://travis-ci.org/profile). Look for the entry `goliatone/gextend`, activate, and sync.
 
 
-## Documentation
-_(Coming soon)_
-
-## Examples
-_(Coming soon)_
-
 ## Release History
-* 2019-08-04: v0.4.0 Check for functions, overwrite instead of extending them
+* 2019-08-04: v0.5.0 Add shim/uhshim functions to `extend` object.
+* 2019-08-04: v0.4.0 Check for functions, overwrite instead of extending them.
