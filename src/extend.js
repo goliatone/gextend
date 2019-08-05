@@ -126,10 +126,11 @@
                 obj[property] = obj[property]();
             }
         }
+        return _extend;
     };
 
 
-    _extend.VERSION = '0.5.1';
+    _extend.VERSION = '0.6.1';
 
     return _extend;
 }));
