@@ -79,6 +79,23 @@ define(['extend'], function(extend) {
             expect(out).toMatchObject(exp);
         });
 
-        it('extend ')
+        it('extend should overwrite functions', function() {
+            var user = {
+                name: 'user',
+                logger: function() {
+                    return console
+                }
+            };
+
+            var config = {
+                logger: {
+                    test: function() {}
+                }
+            };
+
+            var out = extend({}, user, config);
+
+            expect(out.logger).toMatchObject(config.logger);
+        });
     });
 });
