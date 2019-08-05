@@ -56,7 +56,8 @@
                 if (source[property] && source[property].constructor &&
                     source[property].constructor === Object) {
                     target[property] = target[property] || {};
-                    target[property] = extend(target[property], source[property]);
+                    if (typeof target[property] === 'function') target[property] = source[property]; //<<< ADD
+                    else target[property] = extend(target[property], source[property]);
                 } else target[property] = source[property];
             }
         });
@@ -87,7 +88,7 @@
 
     _extend.buildCheck = _buildCheck;
 
-    _extend.only = function(attributes){
+    _extend.only = function(attributes) {
         _extend._attr = attributes;
         return _extend;
     };
