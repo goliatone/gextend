@@ -88,9 +88,44 @@
 
     _extend.buildCheck = _buildCheck;
 
+    /**
+     * Only extend our object with the 
+     * attributes present in the `attributes`
+     * array.
+     * @param {Array} attributes List of attributes
+     * @return {Object} Returns the `extend` object
+     */
     _extend.only = function(attributes) {
         _extend._attr = attributes;
         return _extend;
+    };
+
+    /**
+     * Wraps an object in a function
+     * so that we don't polute a stand 
+     * in object, e.g. if we want to have
+     * a temporaray `logger` using the 
+     * built in console we wrap the `console`
+     * object in a shim. 
+     * 
+     * After extending our object we call
+     * `unshim` to replace these functions
+     * by they wrapped object.
+     */
+    _extend.shim = function(obj) {
+        var shim = function() {
+            return obj;
+        };
+        shim.__shim = true;
+        return shim;
+    };
+
+    _extend.unshim = function(obj) {
+        for (var property in obj) {
+            if (obj[property].__shim) {
+                obj[property] = obj[property]();
+            }
+        }
     };
 
 

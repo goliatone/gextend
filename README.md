@@ -38,11 +38,18 @@ class MyClass {
 
         extend.only(attributes);
         extend(this, config);
+        
+        /**
+         * This will prevent polluting the 
+         * built in console object.
+         */ 
+        extend.unshim(this);
     }
 }
 
 MyClass.DEFAULTS = {
-    autoinitialize: true
+    autoinitialize: true,
+    logger: extend.shim(console)
 };
 ```
 
@@ -90,4 +97,4 @@ _(Coming soon)_
 _(Coming soon)_
 
 ## Release History
-_(Nothing yet)_
+* 2019-08-04: v0.4.0 Check for functions, overwrite instead of extending them
