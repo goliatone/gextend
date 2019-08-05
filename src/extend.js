@@ -129,7 +129,7 @@
     };
 
 
-    _extend.VERSION = '0.4.1';
+    _extend.VERSION = '0.5.1';
 
     return _extend;
 }));
