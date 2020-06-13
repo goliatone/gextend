@@ -102,9 +102,9 @@
 
     /**
      * Wraps an object in a function
-     * so that we don't polute a stand 
+     * so that we don't pollute a stand 
      * in object, e.g. if we want to have
-     * a temporaray `logger` using the 
+     * a temporary `logger` using the 
      * built in console we wrap the `console`
      * object in a shim. 
      * 
@@ -122,7 +122,7 @@
 
     _extend.unshim = function(obj) {
         for (var property in obj) {
-            if (obj[property].__shim) {
+            if (typeof(obj[property]) === 'function' && obj[property].__shim) {
                 obj[property] = obj[property]();
             }
         }
