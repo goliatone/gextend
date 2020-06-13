@@ -62,6 +62,8 @@
             }
         });
 
+        _extend.unshim(target);
+
         _extend._attr = null;
 
         return target;
@@ -97,6 +99,11 @@
      */
     _extend.only = function(attributes) {
         _extend._attr = attributes;
+        /**
+         * TODO: We should return this
+         * so we can to extend.only(att).do()
+         */
+        // return {extend: _extend};
         return _extend;
     };
 
@@ -106,11 +113,11 @@
      * in object, e.g. if we want to have
      * a temporary `logger` using the 
      * built in console we wrap the `console`
-     * object in a shim. 
+     * object in a shim.
      * 
-     * After extending our object we call
-     * `unshim` to replace these functions
-     * by they wrapped object.
+     * Note that we call `unshim` after
+     * we extend our object so there is
+     * no need for you to call this manually.
      */
     _extend.shim = function(obj) {
         var shim = function() {
