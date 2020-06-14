@@ -34,27 +34,26 @@ class MyClass {
     }
 
     init(config){
+        /**
+         * Only these attibutes will
+         * be picked from the config object
+         * and used to extend this
+         * instance
+         */ 
         let attributes = ['logger', 'emitter', 'pubsub'];
 
         extend.only(attributes);
+ 
         extend(this, config);
-        
-        /**
-         * This will prevent polluting the 
-         * built in console object.
-         */ 
-        extend.unshim(this);
-
-        /**
-         * We could also collapse `unshim`
-         * `only`, and `extend`
-         */ 
-        // extend.only(attributes).unshim(config)(this, config);
     }
 }
 
 MyClass.DEFAULTS = {
     autoinitialize: true,
+    /**
+     * This will prevent polluting the
+     * built in console object.
+     */
     logger: extend.shim(console)
 };
 ```
@@ -97,6 +96,8 @@ In order to enable Travis for this specific project, you need to do so on your T
 
 
 ## Release History
+* 2020-06-13: v0.8.0 `extend` will call `unshim` on the target object for you.
+    * Fixed bug where we were picking up super attributes in `shim`.
 * 2019-08-04: v0.6.0 `unshim` returns `extend` object so we can chain.
 * 2019-08-04: v0.5.0 Add shim/uhshim functions to `extend` object.
 * 2019-08-04: v0.4.0 Check for functions, overwrite instead of extending them.
