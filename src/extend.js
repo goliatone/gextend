@@ -36,29 +36,34 @@
         };
     }
 }(this, "extend", function() {
+    
     /**
      * Extend method.
      * @param  {Object} target Source object
      * @return {Object}        Resulting object from
      *                         extending target to params.
      */
-    var _extend = function extend(target) {
-        var sources = [].slice.call(arguments, 1);
+    const _extend = function extend(target) {
+        let sources = [].slice.call(arguments, 1);
 
-        var skip = _buildCheck(_extend._attr);
+        let skip = _buildCheck(_extend._attr);
 
         sources.forEach(function(source) {
             if (!source) return;
-            for (var property in source) {
-
+            
+            for (let property in source) {
                 if (skip(property)) continue;
-
-                if (source[property] && source[property].constructor &&
-                    source[property].constructor === Object) {
-                    target[property] = target[property] || {};
-                    if (typeof target[property] === 'function') target[property] = source[property]; //<<< ADD
-                    else target[property] = extend(target[property], source[property]);
-                } else target[property] = source[property];
+                
+                let targetVal = target[property];
+                let sourceVal = source[property];
+                
+                if(_extend.mergeArrays && areArray(sourceVal, targetVal) {
+                   target[property] = targetVal.concat(sourceVal);
+                } else if (isObject(sourceVal)) {
+                    target[property] = targetVal || {};
+                    if (typeof targetVal === 'function') target[property] = sourceVal; //<<< ADD
+                    else target[property] = extend(targetVal, sourceVal);
+                } else target[property] = sourceVal;
             }
         });
 
@@ -68,6 +73,8 @@
 
         return target;
     };
+    
+    _extend.mergeArrays = false;
 
     function _buildCheck(attributes) {
 
@@ -120,21 +127,28 @@
      * no need for you to call this manually.
      */
     _extend.shim = function(obj) {
-        var shim = function() {
-            return obj;
-        };
+        let shim = _ => obj;
         shim.__shim = true;
         return shim;
     };
 
     _extend.unshim = function(obj) {
-        for (var property in obj) {
+        for (let property in obj) {
             if (typeof(obj[property]) === 'function' && obj[property].__shim) {
                 obj[property] = obj[property]();
+                delete obj[property].__shim;
             }
         }
         return _extend;
     };
+    
+    function isObject(obj) {
+        return obj && obj.constructor && obj.constructor === Object;
+    }
+    
+    function areArray(a1, a2) {
+        return Array.isArray(a1) && Array.isArray(a2);   
+    }
 
 
     _extend.VERSION = '0.6.1';
